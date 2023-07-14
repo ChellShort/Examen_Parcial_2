@@ -52,15 +52,14 @@ def editar(id):
 @app.route('/Actualizar/<id>', methods=['POST'])
 def actualizar(id):
     if request.method == 'POST':
-        varFruta=request.form['txtNombre']
-        varTemporada=request.form['txtCantidad']
+        varNombre=request.form['txtNombre']
+        varCantidad=request.form['txtCantidad']
         varPrecio=request.form['txtPrecio']
-        varStock=request.form['txtAnio']
         curAct = mysql.connection.cursor()
-        curAct.execute('UPDATE tbfrutas set fruta = %s, temporada= %s, precio =%s, stock=%s WHERE id=%s',(varFruta, varTemporada, varPrecio, varStock, id))
+        curAct.execute('UPDATE tbflores set Nombre = %s, cantidad= %s, precio =%s WHERE id=%s',(varNombre, varCantidad, varPrecio, id))
         mysql.connection.commit()
-    flash('La fruta ' + varFruta + ' fue actualizada correctamente ')
-    return redirect(url_for('Consuktar_flor'))
+    flash('La flor ' + varNombre + ' fue actualizada correctamente ')
+    return redirect(url_for('Consultar_flor'))
 
 if __name__ == '__main__':
     app.run(port=5000,debug=True)
